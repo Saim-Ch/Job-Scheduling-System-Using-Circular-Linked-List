@@ -66,14 +66,20 @@ void executeJobs() {
         return;
     }
     Job_Sch *temp = head;
-    while (true) {
-        cout << "Executing Job: " << temp->job_id << " (" << temp->job_name << ") for " << temp->exe_time << " seconds..." << endl;
-        sleep(1);
-        cout << "Job " << temp->job_id << " execution completed!" << endl;
-        
-        temp = temp->next;
-	}
+    int cycles = 2; 
+    for (int i = 0; i < cycles; i++) {
+        cout << "\n--- Cycle " << (i + 1) << " ---\n";
+        Job_Sch *current = head;
+        do {
+            cout << "Executing Job: " << current->job_id << " (" << current->job_name << ") for " << current->exe_time << " seconds..." << endl;
+            cout << "Job " << current->job_id << " execution completed!" << endl;
+            current = current->next;
+        } 
+        while (current != head);
+    }
+    cout << "\nAll jobs executed twice!\n";
 }
+
 void display(){
 	if (head == NULL) {
     cout << "No jobs in the queue!" << endl;
